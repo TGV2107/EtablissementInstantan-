@@ -16,7 +16,7 @@ DM.printTable(cursor,"Users")
 DM.printTable(cursor,"Classes")
 
 window = tkinter.Tk()
-
+window.minsize(800,500)
 label = tkinter.Label(window, text="Etablissement Scolaire Instantané")
 label.pack()
 

@@ -12,13 +12,11 @@ def initDataBase(cursor : sqlite3.Cursor):
     Fonction permettant d'innitialiser les tables non existantes dans la base de donnée"""
     
     #Liste des fichiers et de leurs clés
-    files = [("Users", "ID_user INT PRIMARY KEY, Name TEXT, Password TEXT, Type INT"),
-            ("Classes","ID_user INT, ID_classe INT, FOREIGN KEY (ID_user) REFERENCES Users(ID_user)")]
+    files = [("Users", "ID_user INT PRIMARY KEY, Name TEXT, FirstName TEXT, Username TEXT, Password TEXT, Type INT"),
+            ("Classes","ID_user INT, ID_classe INT, FOREIGN KEY (ID_user) REFERENCES Users(ID_user))")]
 
     for file in files:
         name, rows = file
-
-        cursor.execute(f'''CREATE TABLE IF NOT EXISTS {name}({rows})''')
 
         #On ouvre le fichier csv correpondant
         with open("Datas/" + name + ".csv") as open_file:
@@ -27,7 +25,7 @@ def initDataBase(cursor : sqlite3.Cursor):
             
             #On ajoute chaque ligne au fichier .db, en utilisant une chaîne de caractère contenant autant de ? que de paramètres devant aller dans la table
             for row in r:
-                args = ', '.join(['?' for _ in row])
+                args = ','.join(['?' for _ in row])
                 cursor.execute(f"INSERT INTO {name} VALUES ({args})", row)
 
 def printTable(cursor : sqlite3.Cursor, table : str):
