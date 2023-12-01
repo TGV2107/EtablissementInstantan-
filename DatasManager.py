@@ -12,11 +12,14 @@ def initDataBase(cursor : sqlite3.Cursor):
     Fonction permettant d'innitialiser les tables non existantes dans la base de donnée"""
     
     #Liste des fichiers et de leurs clés
-    files = [("Users", "ID_user INT PRIMARY KEY, LastName, Firstname, Username TEXT, Password TEXT, Type INT"),
-            ("Classes","ID_user INT, ID_classe INT, FOREIGN KEY (ID_user) REFERENCES Users(ID_user))")]
+    files = [("Users", "ID_user INT PRIMARY KEY, LastName TEXT, Firstname TEXT, Username TEXT, Password TEXT, Type INT"),
+            ("Classes","ID_user INT, ID_classe INT, FOREIGN KEY (ID_user) REFERENCES Users(ID_user)")]
 
     for file in files:
         name, rows = file
+
+        if table_exists(cursor, name) == False:
+            cursor.execute(f"""CREATE TABLE {name}({rows})""")
 
         #On ouvre le fichier csv correpondant
         with open("Datas/" + name + ".csv") as open_file:
@@ -63,4 +66,5 @@ def table_exists(cursor : sqlite3.Cursor, table : str) -> bool:
     Fonction renvoyant un booléen indiquant si la table existe dans la base de donnée du curseur"""
 
     cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table'")
-    return table in cursor.fetchone()
+    
+    return bool(table in cursor.fetchone())

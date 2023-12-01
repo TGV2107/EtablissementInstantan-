@@ -9,11 +9,11 @@ import WindowManager as WM
 connexion = sqlite3.connect('Datas/ESI.db')
 cursor = connexion.cursor()
 
-#Importation de la base de donnée depuis les csv
-
 DM.initDataBase(cursor)
-DM.printTable(cursor,"Users")
-DM.printTable(cursor,"Classes")
+DM.printTable(cursor, "Users")
+DM.table_exists(cursor, "Users")
+
+#Importation de la base de donnée depuis les csv
 
 window = tkinter.Tk()
 window.minsize(800,500)
