@@ -12,7 +12,7 @@ def initDataBase(cursor : sqlite3.Cursor):
     Fonction permettant d'innitialiser les tables non existantes dans la base de donnée"""
     
     #Liste des fichiers et de leurs clés
-    files = [("Users", "ID_user INT PRIMARY KEY, Name TEXT, FirstName TEXT, Username TEXT, Password TEXT, Type INT"),
+    files = [("Users", "ID_user INT PRIMARY KEY, LastName, Firstname, Username TEXT, Password TEXT, Type INT"),
             ("Classes","ID_user INT, ID_classe INT, FOREIGN KEY (ID_user) REFERENCES Users(ID_user))")]
 
     for file in files:
