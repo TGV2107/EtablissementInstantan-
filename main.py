@@ -3,7 +3,7 @@ import sqlite3
 import tkinter
 
 import DatasManager as DM
-import WindowManager as WM
+import Window as WM
 
 #création de la base de donnée
 connexion = sqlite3.connect('Datas/ESI.db')
