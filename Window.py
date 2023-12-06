@@ -1,7 +1,6 @@
 import tkinter
-
 import Elements as El
-
+from PIL import Image, ImageTk
 
 class Window:
     def __init__(self,name,size,font) -> None:
@@ -37,8 +36,17 @@ bullet = "\u25CF"
 frame = tkinter.Frame(window,bg=maincolor[0])
 titleframe = tkinter.Frame(window,bg= maincolor[0])
 
-title = tkinter.Label(titleframe,text="Etablissement\nScolaire\nInstantané",font=("Helevetica",35),bg=maincolor[0])
-title.pack(padx=30,fill=tkinter.X)
+#title = tkinter.Label(titleframe,text="Etablissement\nScolaire\nInstantané",font=("Helevetica",35),bg=maincolor[0])
+#title.pack(padx=30,fill=tkinter.X)
+
+width = 325
+height = 200
+img = Image.open("./Assets/IMG/ESI_Logo.png")
+resized_image = img.resize((width, height), Image.ANTIALIAS)
+tkinter_image = ImageTk.PhotoImage(resized_image)
+canvas = tkinter.Canvas(titleframe,width=width, height= height,bg= maincolor[0],highlightthickness=0)
+canvas.create_image(width/2, height/2, anchor=tkinter.CENTER, image=tkinter_image)
+canvas.pack(expand=tkinter.YES)
 
 
 connected = tkinter.Label(frame, text="Connectez-vous :",font=("Helvetica",30), bg=maincolor[0])
@@ -68,6 +76,7 @@ passwordunknown.pack(pady=5)
 titleframe.pack(side = tkinter.TOP)
 frame.pack(expand= tkinter.YES)
 window.mainloop()
+
 
 window2 = tkinter.Tk()
 window2.geometry("400x600")
