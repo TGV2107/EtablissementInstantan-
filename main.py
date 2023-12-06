@@ -3,7 +3,7 @@ import sqlite3
 import tkinter
 
 import DatasManager as DM
-import Window as WM
+from Window import *
 
 #création de la base de donnée
 connexion = sqlite3.connect('Datas/ESI.db')
@@ -15,9 +15,4 @@ DM.table_exists(cursor, "Users")
 
 #Importation de la base de donnée depuis les csv
 
-window = tkinter.Tk()
-window.minsize(800,500)
-label = tkinter.Label(window, text="Etablissement Scolaire Instantané")
-label.pack()
-
-window.mainloop()
+main = Window("Main", "400x400", font=("Helevetica",35),bg=maincolor[0])

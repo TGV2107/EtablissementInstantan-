@@ -1,17 +1,19 @@
 import tkinter
 
+import Elements as El
+
+
 class Window:
     def __init__(self,name,size,font) -> None:
         self.name = name
         self.size = size
         self.font = font
+
+        self.items = []
         
 
     def __str__(self) -> str:
-        return ("Fenetre " + self.name + " De taille " + self.size)
-
-    def display(self):
-        pass
+        return ("Fenetre " + self.name + " de taille " + self.size)
 
     def show(self):
         window = tkinter.Tk()
@@ -66,3 +68,18 @@ passwordunknown.pack(pady=5)
 titleframe.pack(side = tkinter.TOP)
 frame.pack(expand= tkinter.YES)
 window.mainloop()
+
+window2 = tkinter.Tk()
+window2.geometry("400x600")
+window2.title("Le caca")
+
+FrameTest = El.Frame(bg = "White")
+
+FrameTest.items = [El.Label(text="Bonjour Marie", bg="Yellow"),
+                   El.Label(text="Bonjour Marie", bg="Red"),
+                   El.Label(text="Bonjour Marie", bg="Blue")]
+FrameTest.pack(window2)
+
+El.Label(text="Lecacalol", bg="Pink", expand=tkinter.YES).pack(window2)
+
+window2.mainloop()
