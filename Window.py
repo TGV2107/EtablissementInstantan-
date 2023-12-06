@@ -32,6 +32,7 @@ window.geometry("400x600")
 window.title("Page de Connection")
 window.config(background=maincolor[0], bd=0)
 bullet = "\u25CF"
+window.tk.call("wm", "iconphoto", window._w, tkinter.PhotoImage(file="./Assets/IMG/ESI_Logo.ico"))
 
 frame = tkinter.Frame(window,bg=maincolor[0])
 titleframe = tkinter.Frame(window,bg= maincolor[0])
