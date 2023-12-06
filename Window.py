@@ -1,6 +1,7 @@
-import tkinter
+import tkinter as TK, tkinter
 import Elements as El
 from PIL import Image, ImageTk
+import bcrypt as bc
 
 class Window:
     def __init__(self,name,size,font) -> None:
@@ -37,10 +38,19 @@ window.tk.call("wm", "iconphoto", window._w, tkinter.PhotoImage(file="./Assets/I
 frame = tkinter.Frame(window,bg=maincolor[0])
 titleframe = tkinter.Frame(window,bg= maincolor[0])
 
+
+def verify(password):
+    """Watch if the Crypted Password is the same as the crypted Password on the Data Base"""
+    password = password.encode("utf-8")
+    hashedpassword = bc.hashpw(password,bc.gensalt(10))
+    return window.destroy
+
+
 #title = tkinter.Label(titleframe,text="Etablissement\nScolaire\nInstantané",font=("Helevetica",35),bg=maincolor[0])
 #title.pack(padx=30,fill=tkinter.X)
-
-width = 325
+pseudo = ""
+password = ""
+width = 300
 height = 200
 img = Image.open("./Assets/IMG/ESI_Logo.png")
 resized_image = img.resize((width, height), Image.ANTIALIAS)
@@ -53,19 +63,19 @@ canvas.pack(expand=tkinter.YES)
 connected = tkinter.Label(frame, text="Connectez-vous :",font=("Helvetica",30), bg=maincolor[0])
 connected.pack()
 
-pseudotxt = tkinter.Label(frame,text="Entrez votre Identifiant :",font=("Helvetica",15),bg= maincolor[0])
-pseudotxt.pack(pady=10, fill=tkinter.X)
+idtxt = tkinter.Label(frame,text="Entrez votre Identifiant :",textvariable = pseudo, font=("Helvetica",15),bg= maincolor[0])
+idtxt.pack(pady=10, fill=tkinter.X)
 
-pseudo = tkinter.Entry(frame, width=widthentry,font=("Helvetica",10))
-pseudo.pack()
+id = tkinter.Entry(frame, width=widthentry,font=("Helvetica",10))
+id.pack()
 
-passwordtxt = tkinter.Label(frame,text="Entrez votre mot de passe :",font=("Helvetica",15),bg= maincolor[0])
+passwordtxt = tkinter.Label(frame,text="Entrez votre mot de passe :",textvariable=password,font=("Helvetica",15),bg= maincolor[0])
 passwordtxt.pack(pady=10,fill=tkinter.X)
 
-password = tkinter.Entry(frame,show=bullet, width=widthentry,font=("Helvetica",10))
-password.pack()
+pword = tkinter.Entry(frame,show=bullet, width=widthentry,font=("Helvetica",10))
+pword.pack()
 
-valider = tkinter.Button(frame,text="Valider",font=("Helvetica",15),bg=maincolor[3],command=window.destroy)
+valider = tkinter.Button(frame,text="Valider",font=("Helvetica",15),bg=maincolor[3],command=verify(password))
 valider.pack(pady=10)
 
 signin = tkinter.Button(frame,text="Créer un compte",font=("Helvetica",15),bg=maincolor[3])
@@ -82,14 +92,18 @@ window.mainloop()
 window2 = tkinter.Tk()
 window2.geometry("400x600")
 window2.title("Le caca")
+window2.config(bg = maincolor[0])
 
-FrameTest = El.Frame(bg = "White")
+FrameTest = El.Frame(bg = maincolor[0])
 
-FrameTest.items = [El.Label(text="Bonjour Marie", bg="Yellow"),
-                   El.Label(text="Bonjour Marie", bg="Red"),
-                   El.Label(text="Bonjour Marie", bg="Blue")]
+FrameTest.items = [El.Label(text="Etablissement\nScolaire\nInstantané", bg= maincolor[0])]
+
+FrameTest2 = El.Frame(bg = maincolor[0],expand=TK.YES)
+FrameTest2.items = [El.Label(text="Connectez vous : ", font=("Helvetica",15), bg = maincolor[0]),
+                    El.Label(text="Entrez votre Identifiant :", font=("Helvetica",15),bg= maincolor[0],pady=10),
+                    El.Label(text="Entrez votre mot de passe", font= ("Helvetica", 15),bg = maincolor[0],pady=10),
+                    El.Label(text="Autre",font= ("Helvetica",15),bg = maincolor[0])]
+
 FrameTest.pack(window2)
-
-El.Label(text="Lecacalol", bg="Pink", expand=tkinter.YES).pack(window2)
-
+FrameTest2.pack(window2)
 window2.mainloop()
