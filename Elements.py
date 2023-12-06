@@ -1,9 +1,11 @@
 import tkinter as tk
+import PIL
+from PIL import Image, ImageTk
 
 
 class Label:
 
-    def __init__(self, text : str, font : tuple = ("Helvetica", 35), bg : str = "Black", pady : int = 0, padx : int = 0, fill = None, expand = tk.NO, textvariable:str=None) -> None:
+    def __init__(self, text : str, font : tuple = ("Helvetica", 35), bg : str = "Black", pady : int = 0, padx : int = 0, fill = None, expand = tk.NO) -> None:
         
         self.text = text
         self.font = font
@@ -12,7 +14,7 @@ class Label:
         self.padx = padx
         self.fill = fill
         self.expand = expand
-        self.textvariable = textvariable
+        
 
     def __str__(self) -> str:
         return self.text
@@ -25,28 +27,89 @@ class Label:
 
 class Button:
 
-    def __init__(self, text:str, font:tuple =("Helvetica",15),bg= "White", command= None) -> None:
-        pass
-
-class Entry:
-
-    def __init__(self) -> None:
-        pass
-
-class Entry:
+    def __init__(self, text:str, font:tuple =("Helvetica",15),bg= "White", command= None, textvariable:str=None,pady:int = 0,padx:int = 0,fill= None,expand= tk.NO) -> None:
+        self.text = text
+        self.font = font
+        self.bg = bg
+        self.command = command
+        self.textvariable = textvariable
+        self.pady = pady
+        self.padx = padx
+        self.fill = fill
+        self.expand = expand
     
-    def __init__(self) -> None:
-        pass
+    def __str__(self) -> str:
+        return "Button " + self.text
+
+    def pack(self, master):
+        button = tk.Button(master,text= self.text, font= self.font, bg= self.bg, textvariable= self.textvariable, command=self.command)
+        button.pack(pady=self.pady, padx=self.padx, fill=self.fill, expand=self.expand)
+
+class Entry:
+
+    def __init__(self, width:int, font:tuple =("Helvetica",15),show:str ="",textvariable:int=None, pady:int = 0,padx:int = 0,fill= None,expand= tk.NO) -> None:
+        self.width = width
+        self.font = font
+        self.show = show
+        self.textvariable = textvariable
+        self.pady = pady
+        self.padx = padx
+        self.fill = fill
+        self.expand = expand
+
+    def __str__(self) -> str:
+        return "Input Box"
+    
+    def pack(self, master):
+        entry = tk.Entry(master, width= self.width, font= self.font, show= self.show, textvariable= self.textvariable)
+        entry.pack(pady= self.pady, padx= self.padx, fill= self.fill, expand= self.expand)
+        
 
 class Canvas:
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, width:int, height:int,bg:str, highlightthickness:int=0,pady:int = 0,padx:int = 0,fill= None,expand= tk.NO) -> None:
+        self.width = width
+        self.height = height
+        self.bg = bg
+        self.highlightthickness = highlightthickness
+        self.pady = pady
+        self.padx = padx
+        self.fill = fill
+        self.expand = expand
+    
+    def __str__(self) -> str:
+        return "Canvas"
+    
+    def pack(self, master):
+        canvas = tk.Canvas(master, width=self.width, height= self.height, bg= self.bg, highlightthickness= self.highlightthickness)
+        canvas.pack(pady=self.pady, padx= self.padx, fill= self.fill, expand= self.expand)
 
-class Image:
+class Images:
 
-    def __init__(self) -> None:
-         pass
+    def __init__(self, path:str, width:int, height:int, bg: str, highlightthickness:int=0, pady:int=0, padx:int=0, fill=None, expand=tk.NO, anchor=None) -> None:
+        self.path = path
+        self.width = width
+        self.height = height
+        self.bg = bg
+        self.pady = pady
+        self.padx = padx
+        self.highlightthickness = highlightthickness
+        self.fill = fill
+        self.expand = expand
+        self.anchor = anchor
+        self.tkinter_image = None  # Ajoutez cette ligne
+
+    def __str__(self) -> str:
+        return "Image"
+
+    def pack(self, master):
+        img = Image.open(self.path)
+        resized_image = img.resize((self.width, self.height), Image.ANTIALIAS)
+        self.tkinter_image = ImageTk.PhotoImage(resized_image)  # Modifiez cette ligne
+        canvas = tk.Canvas(master, width=self.width, height=self.height, bg=self.bg, highlightthickness=self.highlightthickness)
+        canvas.create_image(self.width/2, self.height/2, anchor=self.anchor, image=self.tkinter_image)
+        canvas.pack(pady=self.pady, padx=self.padx, fill=self.fill, expand=self.expand)
+
 
 class Frame:
 
