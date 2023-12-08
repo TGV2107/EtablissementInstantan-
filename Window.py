@@ -43,6 +43,7 @@ def verify(password):
     """Watch if the Crypted Password is the same as the crypted Password on the Data Base"""
     password = password.encode("utf-8")
     hashedpassword = bc.hashpw(password,bc.gensalt(10))
+    print(hashedpassword)
     return window.destroy
 
 
@@ -50,7 +51,7 @@ def verify(password):
 
 Frame = El.Frame(bg = maincolor[0])
 
-Frame.items = [El.Images("./Assets/IMG/ESI_Logo.png",300,200,maincolor[0],anchor=tkinter.CENTER,expand=tkinter.YES)]
+Frame.items = [El.Images("./Assets/IMG/ESI_Logo.png",300,200,maincolor[0],anchor=tkinter.CENTER,expand=TK.YES)]
 
 Frame2 = El.Frame(bg = maincolor[0],expand=TK.YES)
 Frame2.items = [El.Label(text="Connectez vous : ", font=("Helvetica",30), bg = maincolor[0]),
@@ -58,9 +59,9 @@ Frame2.items = [El.Label(text="Connectez vous : ", font=("Helvetica",30), bg = m
                     El.Entry(width=30,font=("Helvetica",10)),
                     El.Label(text="Entrez votre mot de passe :", font= ("Helvetica", 15),bg = maincolor[0],pady=10),
                     El.Entry(width=30, font=("Helvetica",10), show= bullet, textvariable= password),
+                    El.Button(text="Mot de passe oublié ?",font=("Helvetica",8),bg= maincolor[1], pady=5),
                     El.Button(text="Valider",font=("Helvetica",15),bg=maincolor[3],command=verify(password),pady=10),
-                    El.Button(text="Créer un compte",font=("Helvetica",15),bg=maincolor[3],pady = 10),
-                    El.Button(text="Mot de passe oublié ?",font=("Helvetica",10),bg= maincolor[1], pady=5)]
+                    El.Button(text="Créer un compte",font=("Helvetica",15),bg=maincolor[4],pady = 10)]
 
 Frame.pack(window)
 Frame2.pack(window)
