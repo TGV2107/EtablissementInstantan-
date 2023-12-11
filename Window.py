@@ -1,6 +1,9 @@
 import tkinter as TK, tkinter
 import Elements as El
 import bcrypt as bc
+import sqlite3
+
+cursor = sqlite3.Cursor
 
 class Window:
     def __init__(self,name,size:str, items:list, minsize:tuple= None, maxsize:tuple= None, bg:str="white", logopath:str= None) -> None:
@@ -13,7 +16,7 @@ class Window:
         self.logopath = logopath
         self.palet = ("#CAF0F8","#90E0EF","#48CAE4","#00B4D8","#0096C7","#0077B6","#03045E") 
 
-    def __str__(self) -> str:
+    def __str__(self) -> None:
         return ("Fenetre " + self.name + " de taille " + self.size)
 
     def show(self):
@@ -24,7 +27,7 @@ class Window:
         frame.pack()
         window.mainloop()
 
-password =""
+password = ""
 maincolor = ("#CAF0F8","#90E0EF","#48CAE4","#00B4D8","#0096C7","#0077B6","#03045E")
 widthentry = 30
 window = tkinter.Tk()
@@ -41,6 +44,8 @@ titleframe = tkinter.Frame(window,bg= maincolor[0])
 
 def verify(password):
     """Watch if the Crypted Password is the same as the crypted Password on the Data Base"""
+    if password == "":
+        return None
     password = password.encode("utf-8")
     hashedpassword = bc.hashpw(password,bc.gensalt(10))
     print(hashedpassword)
@@ -66,3 +71,4 @@ Frame2.items = [El.Label(text="Connectez vous : ", font=("Helvetica",30), bg = m
 Frame.pack(window)
 Frame2.pack(window)
 window.mainloop()
+

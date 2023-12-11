@@ -47,7 +47,7 @@ class Button:
 
 class Entry:
 
-    def __init__(self, width:int, font:tuple =("Helvetica",15),show:str ="",textvariable:int=None, pady:int = 0,padx:int = 0,fill= None,expand= tk.NO) -> None:
+    def __init__(self, width:int,font:tuple =("Helvetica",15),show:str ="",textvariable:int=None, pady:int = 0,padx:int = 0,fill= None,expand= tk.NO) -> None:
         self.width = width
         self.font = font
         self.show = show
@@ -56,7 +56,7 @@ class Entry:
         self.padx = padx
         self.fill = fill
         self.expand = expand
-
+        
     def __str__(self) -> str:
         return "Input Box"
     
